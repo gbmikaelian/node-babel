@@ -20,7 +20,7 @@ export default class {
             return res.json({ token, user });
         } catch (e) {
             console.log(e);
-            return res.send(e);
+            return res.json({ success: false, error: e.message });
         }
     }
     static async signIn (req, res) {
@@ -31,13 +31,13 @@ export default class {
                 throw new Error(ERROR.USERNAME);
             }
             if (!bcrypt.compareSync(req.body.password, user.password)) {
-                throw new Error(ERROR.USERNAME);
+                throw new Error(ERROR.PASSWORD);
             }
 
             return res.json({ token: jwt.sign({ id: user.id }, process.env.JWT_KEY) });
         } catch (e) {
             console.log(e);
-            return res.send(e);
+            return res.json({ success: false, error: e.message });
         }
     }
 }

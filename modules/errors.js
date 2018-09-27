@@ -4,6 +4,8 @@ const INVALID_ACTION = 605;
 const PERMISSION_DENIED = 606;
 const INVALID_DATA = 610;
 const USERNAME = 'There is no matching username';
+const PASSWORD = 'There is no matching password';
+const UNDEFINED_USER = 'User not found';
 
 export {
     VALIDATION,
@@ -11,5 +13,7 @@ export {
     INVALID_ACTION,
     PERMISSION_DENIED,
     INVALID_DATA,
-    USERNAME
+    USERNAME,
+    PASSWORD,
+    UNDEFINED_USER
 };
