@@ -1,6 +1,4 @@
 import Controller from './Controller';
-// import User from '../models/User';
-// import { ERROR } from '../modules';
 
 export default class extends Controller {
     static async me (req, res) {
