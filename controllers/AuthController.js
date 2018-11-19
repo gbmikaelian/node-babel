@@ -15,7 +15,7 @@ export default class {
 
             await user.save();
 
-            let token = jwt.sign({ id: user.id }, process.env.JWT_KEY);
+            let token = jwt.sign({ id: user.id }, process.env.JWT_KEY || 'your-key');
 
             return res.json({ token, user });
         } catch (e) {
@@ -34,7 +34,7 @@ export default class {
                 throw new Error(ERROR.PASSWORD);
             }
 
-            return res.json({ token: jwt.sign({ id: user.id }, process.env.JWT_KEY) });
+            return res.json({ token: jwt.sign({ id: user.id }, process.env.JWT_KEY || 'your-key') });
         } catch (e) {
             console.log(e);
             return res.json({ success: false, error: e.message });

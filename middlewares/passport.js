@@ -11,7 +11,7 @@ passport.use(new JwtStrategy({
         ExtractJwt.fromAuthHeaderWithScheme('Bearer'),
         ExtractJwt.fromUrlQueryParameter('auth_token')
     ]),
-    secretOrKey: process.env.JWT_KEY
+    secretOrKey: process.env.JWT_KEY || 'your-key'
 }, async (payload, done) => {
     const user = await User.findById(payload.id, { password: 0 });
     return done(null, user);
