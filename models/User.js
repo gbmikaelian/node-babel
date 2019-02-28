@@ -2,7 +2,7 @@ import bcrypt from 'bcryptjs';
 import mongoose, { Schema } from 'mongoose';
 
 const userSchema = new Schema({
-    username: {
+    email: {
         type: String,
         required: [true, 'Username field is required'],
         unique: true
@@ -30,7 +30,7 @@ userSchema.statics.seed = async function () {
         const users = await this.find();
         if (!users.length) {
             let user = new User({
-                username: 'admin',
+                email: 'admin@gmail.com',
                 password: '123456',
                 roles: ['admin']
             });
