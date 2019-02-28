@@ -4,7 +4,7 @@ import mongoose, { Schema } from 'mongoose';
 const userSchema = new Schema({
     email: {
         type: String,
-        required: [true, 'Username field is required'],
+        required: [true, 'email field is required'],
         unique: true
     },
     password: {

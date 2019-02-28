@@ -8,7 +8,7 @@ export default class {
     static async signUp (req, res) {
         try {
             let user = new User({
-                username: req.body.username,
+                email: req.body.email,
                 password: req.body.password,
                 roles: req.body.roles
             });
@@ -25,10 +25,10 @@ export default class {
     }
     static async signIn (req, res) {
         try {
-            const user = await User.findOne({ username: req.body.username });
+            const user = await User.findOne({ email: req.body.email });
 
             if (!user) {
-                throw new Error(ERROR.USERNAME);
+                throw new Error(ERROR.EMAIL);
             }
             if (!bcrypt.compareSync(req.body.password, user.password)) {
                 throw new Error(ERROR.PASSWORD);
