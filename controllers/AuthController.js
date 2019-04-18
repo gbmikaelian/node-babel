@@ -5,7 +5,7 @@ import { ERROR } from '../modules';
 import { User } from '../models/';
 
 export default class {
-    static async signUp (req, res) {
+    signUp = async (req, res) => {
         try {
             let user = new User({
                 email: req.body.email,
@@ -23,7 +23,7 @@ export default class {
             return res.json({ success: false, error: e.message });
         }
     }
-    static async signIn (req, res) {
+    signIn = async (req, res) => {
         try {
             const user = await User.findOne({ email: req.body.email });
 
