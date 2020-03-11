@@ -9,8 +9,7 @@ import { api as apiRoutes, auth as authRoutes } from './routes';
 
 const app = express();
 
-mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost/your-db', { useNewUrlParser: true });
-mongoose.set('useCreateIndex', true);
+mongoose.connect(process.env.MONGO_URL, { useCreateIndex: true, useNewUrlParser: true, useUnifiedTopology: true });
 
 app.use(passport.initialize());
 
@@ -25,4 +24,4 @@ app.use('/auth', authRoutes);
 app.use('/api', passport.authenticate('jwt', { session: false }), apiRoutes);
 
 const port = process.env.PORT || 3000;
-app.listen(port, () => console.log(`Server is listening at http://localhost:${port}`));
+app.listen(port, () => console.log(`Server is listening at port ${port}`));
