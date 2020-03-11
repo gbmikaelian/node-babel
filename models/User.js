@@ -2,6 +2,10 @@ import bcrypt from 'bcryptjs';
 import mongoose, { Schema } from 'mongoose';
 
 const userSchema = new Schema({
+    firstName: String,
+    lastName: String,
+    phoneNumber: String,
+    country: String,
     email: {
         type: String,
         required: [true, 'email field is required'],
@@ -12,11 +16,9 @@ const userSchema = new Schema({
         required: [true, 'Password field is required'],
         minlength: [6, 'Password must be at least 6 characters long']
     },
-    roles: Array,
-    registeredAt: {
-        type: Date,
-        default: Date.now
-    }
+    roles: Array
+}, {
+    timestamps: true
 });
 
 userSchema.post('validate', (doc, next) => {
