@@ -5,9 +5,9 @@ import { ERROR } from '../modules';
 import { User } from '../models/';
 
 export default class {
-    signUp = async (req, res) => {
+    async signUp (req, res) {
         try {
-            let user = new User({
+            const user = new User({
                 email: req.body.email,
                 password: req.body.password,
                 roles: req.body.roles
@@ -15,7 +15,7 @@ export default class {
 
             await user.save();
 
-            let token = jwt.sign({ id: user.id }, process.env.JWT_KEY);
+            const token = jwt.sign({ id: user.id }, process.env.JWT_KEY);
 
             return res.json({ token, user });
         } catch (e) {
@@ -23,7 +23,8 @@ export default class {
             return res.json({ success: false, error: e.message });
         }
     }
-    signIn = async (req, res) => {
+
+    async signIn (req, res) {
         try {
             const user = await User.findOne({ email: req.body.email });
 
@@ -34,7 +35,7 @@ export default class {
                 throw new Error(ERROR.PASSWORD);
             }
 
-            return res.json({ token: jwt.sign({ id: user.id }, process.env.JWT_KEY || 'your-key') });
+            return res.json({ token: jwt.sign({ id: user.id }, process.env.JWT_KEY) });
         } catch (e) {
             console.log(e);
             return res.json({ success: false, error: e.message });

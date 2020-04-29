@@ -31,7 +31,7 @@ userSchema.statics.seed = async function () {
     try {
         const users = await this.find();
         if (!users.length) {
-            let user = new User({
+            const user = new User({
                 email: 'admin@gmail.com',
                 password: '123456',
                 roles: ['admin']
