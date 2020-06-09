@@ -1,7 +1,7 @@
 import passport from 'passport';
 import { ExtractJwt, Strategy as JwtStrategy } from 'passport-jwt';
 
-import { User } from '../models';
+import User from 'src/models/User';
 
 /**
  * token auth
@@ -11,7 +11,7 @@ passport.use(new JwtStrategy({
         ExtractJwt.fromAuthHeaderWithScheme('Bearer'),
         ExtractJwt.fromUrlQueryParameter('auth_token')
     ]),
-    secretOrKey: process.env.JWT_KEY || 'your-key'
+    secretOrKey: process.env.JWT_KEY
 }, async (payload, done) => {
     const user = await User.findById(payload.id, { password: 0 });
     return done(null, user);
