@@ -1,16 +1,18 @@
+import Controller from './Controller';
+
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import { ERROR } from '../modules';
+import { ERROR } from 'src/modules';
 
-import { User } from '../models/';
+import User from 'src/models/User';
 
-export default class {
+class AuthController extends Controller {
     async signUp (req, res) {
         try {
             const user = new User({
                 email: req.body.email,
                 password: req.body.password,
-                roles: req.body.roles
+                role: req.body.role
             });
 
             await user.save();
@@ -19,8 +21,7 @@ export default class {
 
             return res.json({ token, user });
         } catch (e) {
-            console.log(e);
-            return res.json({ success: false, error: e.message });
+            super.handleError(res, e);
         }
     }
 
@@ -31,14 +32,18 @@ export default class {
             if (!user) {
                 throw new Error(ERROR.EMAIL);
             }
+            if (!req.body.password) {
+                throw new Error(ERROR.PASSWORD);
+            }
             if (!bcrypt.compareSync(req.body.password, user.password)) {
                 throw new Error(ERROR.PASSWORD);
             }
 
             return res.json({ token: jwt.sign({ id: user.id }, process.env.JWT_KEY) });
         } catch (e) {
-            console.log(e);
-            return res.json({ success: false, error: e.message });
+            super.handleError(res, e);
         }
     }
 }
+
+export default AuthController;

@@ -5,8 +5,7 @@ export default class extends Controller {
         try {
             return res.json({ success: true, user: req.user });
         } catch (e) {
-            console.log(e);
-            return res.json({ success: false, error: e.message });
+            super.handleError(res, e);
         }
     }
 }

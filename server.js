@@ -4,8 +4,8 @@ import mongoose from 'mongoose';
 import morgan from 'morgan';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import passport from './middlewares/passport';
-import { api as apiRoutes, auth as authRoutes } from './routes';
+import passport from 'src/middlewares/passport';
+import { api as apiRoutes, auth as authRoutes } from 'src/routes';
 
 const app = express();
 
