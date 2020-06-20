@@ -16,7 +16,7 @@ const userSchema = new Schema({
         required: [true, 'Password field is required'],
         minlength: [6, 'Password must be at least 6 characters long']
     },
-    roles: Array
+    roles: String
 }, {
     timestamps: true
 });
@@ -34,7 +34,7 @@ userSchema.statics.seed = async function () {
             const user = new User({
                 email: 'admin@gmail.com',
                 password: '123456',
-                roles: ['admin']
+                role: 'admin'
             });
             user.save((err) => {
                 if (err) console.log(err);

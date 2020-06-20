@@ -1,14 +1,21 @@
 ## Getting started
 
-```bash
-# clone the project
-git clone https://github.com/gbmikaelian/node-babel.git
-
 # install dependency
+```bash
 npm install
+```
+
+
+
+
+# start
+```bash
+npm start
+```
 
 # develop
-npm start
+```bash
+npm run dev
 ```
 
 Your host http://localhost:3000.
@@ -17,5 +24,3 @@ Your host http://localhost:3000.
 
 # auto fix
 npm run lint -- --fix
-
-Copyright (c) 2018-present Garik Mikaelian
