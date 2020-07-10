@@ -9,6 +9,11 @@
                     "src": "./src"
                   }
             }
+        ],
+        ["@babel/plugin-transform-runtime",
+            {
+              "regenerator": true
+            }
         ]
     ]
 }

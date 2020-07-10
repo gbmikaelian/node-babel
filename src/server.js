@@ -6,6 +6,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import passport from 'src/middlewares/passport';
 import { api as apiRoutes, auth as authRoutes } from 'src/routes';
+import { name } from '../package';
 
 const app = express();
 
@@ -20,8 +21,12 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.get('/', (req, res) => {
+    res.send(name);
+});
+
 app.use('/auth', authRoutes);
 app.use('/api', passport.authenticate('jwt', { session: false }), apiRoutes);
 
 const port = process.env.PORT || 3000;
-app.listen(port, () => console.log(`Server is listening at port ${port}`));
+app.listen(port, () => console.log('%s is listening at port %s', name, port));
